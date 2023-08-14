@@ -11,6 +11,7 @@ import {
 import { UsersService } from './users.service';
 import { userDTO } from './dto/user.dto';
 import { AuthGuard } from '../auth/auth.guard';
+import * as bcrypt from 'bcrypt';
 
 
 @Controller('user')
@@ -19,6 +20,8 @@ export class UsersController {
 
   @Post()
   create(@Body() data: userDTO) {
+    const hashedPassword = bcrypt.hashSync(data.password, 8);
+    data.password = hashedPassword;
     return this.usersService.create(data);
   }
 

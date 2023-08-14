@@ -5,12 +5,13 @@ import { UsersModule } from '../users/users.module';
 import { jwtConstants } from './constants';
 import { JwtModule } from '@nestjs/jwt';
 import { TokenModule } from '../token/token.module';
+import * as dotenv from 'dotenv';
 
 @Module({
   imports: [UsersModule, 
     JwtModule.register({
       global: true,
-      secret: jwtConstants.secret,
+      secret: process.env.JWT_SECRET || jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
   }),
   TokenModule],

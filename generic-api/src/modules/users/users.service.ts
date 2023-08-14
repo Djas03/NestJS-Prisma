@@ -24,7 +24,8 @@ export class UsersService {
       data: {
         email: email,
         username: username,
-        password: bcrypt.hashSync(password, 8),
+       // password: bcrypt.hashSync(password, 8),
+        password: password,
       },
     });
 
